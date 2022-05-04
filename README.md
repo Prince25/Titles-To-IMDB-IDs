@@ -31,7 +31,7 @@ Replace `<Text File>` with the text file containing the movie or show titles to 
 Upon run, a `OUTPUT_FILE` CSV containing the respective IMDB IDs will be generated. If some titles failed to convert, a `ERROR_FILE` CSV will be created as well.
 
 ### Example
-An example text file, [`example.txt`](example.txt), is provided for demonstration. Running\
+An example text file, [`example.txt`](example.txt), is provided for demonstration. Running
 ```
 npm run example
 ```
