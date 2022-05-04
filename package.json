@@ -1,0 +1,36 @@
+{
+  "name": "titles-to-imdb-id",
+  "version": "1.0.0",
+  "description": "Get IMDB ID from Movie or Show Titles",
+  "main": "main.js",
+  "scripts": {
+    "example": "node main.js example.txt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prince25/Titles-To-IMDB-IDs.git"
+  },
+  "keywords": [
+    "imdb",
+    "id",
+    "movie",
+    "show",
+    "name",
+    "title",
+    "search",
+    "convert",
+    "translate",
+    "scrape"
+  ],
+  "author": "Prince25",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Prince25/Titles-To-IMDB-IDs/issues"
+  },
+  "homepage": "https://github.com/Prince25/Titles-To-IMDB-IDs",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.10",
+    "csv-writer": "^1.6.0",
+    "node-fetch": "^2.6.1"
+  }
+}
