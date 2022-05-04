@@ -23,7 +23,7 @@ Run `node main.js <Text File>`.
 
 Replace `<Text File>` with the text file containing the movie or show titles to convert.
 
-`main.js` contains additional configurable options:
+[`main.js`](main.js) contains additional configurable options:
   - `DELAY`: Delay in milliseconds between IMDB search queries. Default: `1000`. Be careful to not set this too low.
   - `OUTPUT_FILE`: The name of the output CSV file containing the titles, IMDB IDs, and IMDB URLs. Default: `imdb_ids`.
   - `ERROR_FILE`: The name of the error CSV file containing the titles which failed to be converted as well as the error message and the attempted IMDB search query URL. Default: `errors`.
@@ -31,10 +31,14 @@ Replace `<Text File>` with the text file containing the movie or show titles to 
 Upon run, a `OUTPUT_FILE` CSV containing the respective IMDB IDs will be generated. If some titles failed to convert, a `ERROR_FILE` CSV will be created as well.
 
 ### Example
-An example text file (`example.txt`) is provided for demonstration. Running\
-`npm run example`\
-OR\
-`node main.js example.txt`\
+An example text file, [`example.txt`](example.txt), is provided for demonstration. Running\
+```
+npm run example
+```
+OR
+```
+node main.js example.txt
+```
 will generate `imdb_ids.csv` and `errors.csv`.
 
 
