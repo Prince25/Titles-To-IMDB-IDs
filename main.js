@@ -41,6 +41,7 @@ const
 	data = [];
 
 console.log("\nGetting IMDB IDs...");
+let count = 0;
 (async () => {
 	for (const title of titles) {
 		try {
@@ -57,6 +58,8 @@ console.log("\nGetting IMDB IDs...");
 				url: `https://www.imdb.com/find?s=all&q=${encodeURIComponent(title)}`
 			});
 		}
+		count++;
+		process.stdout.write(`${count}/${titles.length} titles completed.\r`);
 		await sleep(DELAY);
 	}
 	
