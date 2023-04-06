@@ -21,10 +21,10 @@ function writeCSV(fileName, data, header) {
     return new Promise(async resolve => {
         const createCsvWriter = csv.createObjectCsvWriter;
         const csvWriter = createCsvWriter({
-          path: fileName + '.csv',
-          header: header
+            path: fileName + '.csv',
+            header: header
         });
-        
+
         await csvWriter.writeRecords(data)
         console.log('The CSV file, ' + fileName + '.csv, was written successfully')
         resolve();

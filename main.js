@@ -26,16 +26,16 @@ let titles = readTxtFile(fileName);
 
 // Get the IMDB ID of each movie or show, and write to CSV file
 // Write error file with original movie or show title, error, and the URL attempted
-const 
+const
 	ID_CSV_HEADER = [
-		{id: 'title', title: 'Title'},
-		{id: 'id', title: 'IMDB ID'},
-		{id: 'url', title: 'IMDB URL'},
+		{ id: 'title', title: 'Title' },
+		{ id: 'id', title: 'IMDB ID' },
+		{ id: 'url', title: 'IMDB URL' },
 	],
 	ERROR_CSV_HEADER = [
-		{id: 'title', title: 'Title'},
-		{id: 'error', title: 'Error Message'},
-		{id: 'url', title: 'Query URL'},
+		{ id: 'title', title: 'Title' },
+		{ id: 'error', title: 'Error Message' },
+		{ id: 'url', title: 'Query URL' },
 	],
 	errorData = [],
 	data = [];
@@ -62,8 +62,8 @@ let count = 0;
 		process.stdout.write(`${count}/${titles.length} titles completed.\r`);
 		await sleep(DELAY);
 	}
-	
-	
+
+
 	await writeCSV(OUTPUT_FILE, data, ID_CSV_HEADER);
 	if (errorData.length != 0) await writeCSV(ERROR_FILE, errorData, ERROR_CSV_HEADER);
 
