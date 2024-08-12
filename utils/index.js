@@ -20,23 +20,55 @@ const imdbId = async function (title) {
 
   const $ = cheerio.load(body);
 
-  let movieLink = $("body > div:nth-of-type(2) > main > div:nth-of-type(2) > div:nth-of-type(3) > section > div > div:nth-of-type(1) > section:nth-of-type(2) > div:nth-of-type(2) > ul > li:nth-of-type(1) > div:nth-of-type(2) > div > a")
-    .attr('href');
 
-  if (!movieLink.includes("tt")) {
-    movieLink = $("body > div:nth-of-type(2) > main > div:nth-of-type(2) > div:nth-of-type(3) > section > div > div:nth-of-type(1) > section:nth-of-type(3) > div:nth-of-type(2) > ul > li:nth-of-type(1) > div:nth-of-type(2) > div > a")
-      .attr('href');
+  // Extract Movie Element
+  // Method 1
+  let movieElement = $('a.ipc-metadata-list-summary-item__t[role="button"]').filter((i, el) => {
+    const href = $(el).attr('href');
+    return href && href.includes('/title/');
+  });
+
+  // Method 2
+  if (movieElement.length === 0) {
+    movieElement = $('a[role="button"][tabindex="0"]').filter((i, el) => {
+      const href = $(el).attr('href');
+      // Check if href contains 'title/' which is common for IMDb titles
+      return href && href.includes('/title/');
+    });
   }
 
-  if (!movieLink) throw new Error('Movie not found');
+  // Method 3
+  if (movieElement.length === 0) {
+    movieElement = $('a').filter((i, el) => {
+      const className = $(el).attr('class');
+      const href = $(el).attr('href');
+      return className && className.includes('ipc-metadata-list-summary-item') && href && href.includes('/title/');
+    });
+  }
 
+
+  // Extract Movie Link and Title
+  let link, imdbTitle = null;
+  if (movieElement.length > 0) {
+    link = movieElement.first().attr('href');
+    imdbTitle = movieElement.first().text().trim();
+  } else {
+    throw new Error('Movie element not found')
+  }
+
+  // Check if the link is a valid movie link (has /title/ or "tt", instead of /name/ or "nm") )
+  if (!link || !imdbTitle || !link.includes("tt")) {
+    throw new Error('Invalid movie link')
+  }
+
+
+  // Extract ID
   const regex = /\/title\/(t{2}\d+)\/?/;
-  const [, id] = regex.exec(movieLink) || [];
+  const [, id] = regex.exec(link) || [];
 
   if (!id) throw new Error('ID not found')
 
-  return id;
+  return {imdbTitle, id};
 }
-
 
 module.exports = imdbId;

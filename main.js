@@ -28,7 +28,8 @@ let titles = readTxtFile(fileName);
 // Write error file with original movie or show title, error, and the URL attempted
 const
 	ID_CSV_HEADER = [
-		{ id: 'title', title: 'Title' },
+		{ id: 'title', title: 'Text File Title' },
+		{ id: 'imdbTitle', title: 'IMDB Title' },
 		{ id: 'id', title: 'IMDB ID' },
 		{ id: 'url', title: 'IMDB URL' },
 	],
@@ -45,9 +46,12 @@ let count = 0;
 (async () => {
 	for (const title of titles) {
 		try {
-			const id = await imdbId(title);
+			const info = await imdbId(title);
+			const id = info.id;
+			const imdbTitle = info.imdbTitle;
 			data.push({
 				title,
+				imdbTitle,
 				id,
 				url: `https://www.imdb.com/title/${id}/`
 			});
